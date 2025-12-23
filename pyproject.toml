@@ -1,7 +1,19 @@
-## NGBS iCON Python API
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
 
-This is an **async Python client library** for communicating with **NGBS iCON** controllers. It allows querying and controlling zones, retrieving sensor and controller data, and issuing commands over the native socket-based protocol.
+[project]
+name = "ngbs-icon"
+version = "0.1.0"
+description = "Async Python client for NGBS iCON controllers"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Your Name" }
+]
 
-It is intended for use in Home Assistant.
+dependencies = []
 
-> This project is a rework of [molnarg/ngbs-icon](https://github.com/molnarg/ngbs-icon), adapted for use with Python.
+[project.urls]
+Homepage = "https://github.com/yourname/ngbs-icon"
