@@ -6,7 +6,7 @@ from typing import Any
 
 import async_timeout
 
-from .exceptions import TransportError, ProtocolError
+from .exceptions import TransportError
 
 
 class Transport:

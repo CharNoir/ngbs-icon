@@ -5,6 +5,7 @@ from typing import Optional
 from .transport import Transport
 from .models import IconController
 
+from .exceptions import ProtocolError
 
 class NgbsIconApi:
     """
@@ -33,3 +34,16 @@ class NgbsIconApi:
 
         await self._controller.async_update()
         return self._controller
+    
+    async def async_get_sysid(self) -> str:
+        """Ask the controller for its SYSID."""
+        try:
+            raw = await self._transport.request({"RELOAD": 6})
+        except ProtocolError as e:
+            raise ProtocolError("Failed to retrieve SYSID.", response=str(e))
+
+        sysid = raw.get("SYSID")
+        if not sysid:
+            raise ProtocolError("No SYSID found in controller response", response=str(raw))
+
+        return sysid
