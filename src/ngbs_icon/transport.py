@@ -37,10 +37,20 @@ class Transport:
 
                 raw = await reader.read()
 
+            if not raw:
+                raise TransportError("Empty response from controller")
+
+            try:
+                data = json.loads(raw.decode())
+            except json.JSONDecodeError as err:
+                raise TransportError(f"Invalid JSON response: {raw!r}") from err
+
+            return data
+
         except Exception as err:
             raise TransportError(str(err)) from err
+
         finally:
             if writer is not None:
                 writer.close()
                 await writer.wait_closed()
-
